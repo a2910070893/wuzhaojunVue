@@ -1,6 +1,6 @@
 <template>
 
-    <div><Home></Home><h1>这个是测试3</h1></div>
+    <div><h1>这个是测试3</h1></div>
 </template>
 
 <script>
