@@ -26,7 +26,7 @@
           <span>王小虎</span>
         </el-header>
 
-<!--        <el-main>-->
+        <el-main>
 <!--                    <el-table :data="tableData">-->
 
 <!--                      <el-table-column prop="date" label="日期" width="140">-->
