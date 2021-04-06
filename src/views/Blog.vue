@@ -19,12 +19,34 @@
             <i class="el-icon-setting" style="margin-right: 15px"></i>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>查看</el-dropdown-item>
-              <el-dropdown-item>新增</el-dropdown-item>
+              <el-dropdown-item >
+
+                <!--        隐藏的表单标签-->
+                <el-button type="text" @click="dialogFormVisible = true">打开嵌套表单的 Dialog</el-button>
+
+              </el-dropdown-item>
               <el-dropdown-item>删除</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
           <span>王小虎</span>
         </el-header>
+
+      <!--      表单标签      -->
+        <el-dialog title="博客" :visible.sync="dialogFormVisible">
+          <el-form :model="form">
+            <el-form-item label="活动名称" :label-width="formLabelWidth">
+              <el-input v-model="form.name" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="活动区域" :label-width="formLabelWidth">
+              <el-input v-model="form.region" autocomplete="off"></el-input>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">取 消</el-button>
+            <el-button type="primary" @click="test()">确 定</el-button>
+          </div>
+        </el-dialog>
+
 
         <el-main>
 <!--                    <el-table :data="tableData">-->
@@ -58,14 +80,27 @@
 <script>
   export default {
     data() {
-      const item = {
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      };
+      // const item = {
+      //   date: '2016-05-02',
+      //   name: '王小虎',
+      //   address: '上海市普陀区金沙江路 1518 弄'
+      // };
       return {
-        tableData: Array(20).fill(item)
+        // tableData: Array(20).fill(item),
+        dialogFormVisible: false,
+        form: {
+          name: '',
+          region: '',
+          delivery: false,
+        },
+        formLabelWidth: '120px',
       }
-    }
+    },
+    methods:{
+      test(){
+        this.dialogFormVisible = false
+        console.log(this.form)
+      },
+    },
   };
 </script>
