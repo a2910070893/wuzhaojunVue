@@ -12,7 +12,8 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-    hidden:true
+    hidden:true,
+    redirect:'/Test1'
   },{
     path: '/blog',
     name: '博客',
@@ -23,7 +24,8 @@ const routes = [
         name: '测试1',
         component: Test1
       },
-    ]
+    ],
+    redirect:'/Test1'
   },
   {
     path: '/navigation',

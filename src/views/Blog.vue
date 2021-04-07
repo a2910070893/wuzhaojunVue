@@ -18,24 +18,23 @@
           <el-dropdown>
             <i class="el-icon-setting" style="margin-right: 15px"></i>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>
-                <el-button type="text" @click="dialogFormVisible = true">查询内容</el-button>
-              </el-dropdown-item>
+<!--              <el-dropdown-item>-->
+<!--                <el-button type="text" @click="dialogFormVisible = true">查询内容</el-button>-->
+<!--              </el-dropdown-item>-->
               <el-dropdown-item >
                 <!--        隐藏的表单标签-->
                 <el-button type="text" @click="dialogFormVisible = true">新增内容</el-button>
+
               </el-dropdown-item>
-              <el-dropdown-item>
-                <el-button type="text" @click="dialogFormVisible = true">修改内容</el-button>
-              </el-dropdown-item>
+<!--              <el-dropdown-item>-->
+<!--                <el-button type="text" @click="dialogFormVisible = true">修改内容</el-button>-->
+<!--              </el-dropdown-item>-->
             </el-dropdown-menu>
           </el-dropdown>
           <span>王小虎</span>
         </el-header>
 
       <!--      表单标签      -->
-
-
 
         <el-dialog title="博客" :visible.sync="dialogFormVisible">
           <el-form :model="form">
@@ -104,11 +103,6 @@
     inject:['reload'],
     data() {
       // https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/blog/findAllBlog
-      // const item = {
-      //   date: '2016-05-02',
-      //   name: '王小虎',
-      //   address: '上海市普陀区金沙江路 1518 弄'
-      // };
       return {
         // tableData: Array(20).fill(item),
         dialogFormVisible: false,
@@ -122,11 +116,12 @@
       }
     },
     methods:{
+      //新增博客
       insertBlog(){
         this.dialogFormVisible = false;
 
         let _this = this;
-        axios.post('http://localhost:8080/wuzhaojun/blog/insertBlog',this.form).then(function (res) {
+        axios.post(this.url+'blog/insertBlog',this.form).then(function (res) {
 
           if (res.data === true) {
             _this.reload();
