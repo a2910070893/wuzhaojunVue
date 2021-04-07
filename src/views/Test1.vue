@@ -58,7 +58,7 @@
             </el-table-column>
         </el-table>
 
-<!--        -->
+
 <!--        <el-dialog title="博客" :visible.sync="dialogFormVisible">-->
 <!--            <el-form :model="form">-->
 <!--                <el-form-item label="博客Id" :label-width="formLabelWidth" v-if="false">-->
@@ -83,7 +83,7 @@
                         autosize
                         placeholder="请输入Id"
                         v-model="form.blogId"
-                >
+                        v-if="false">
                     <!--              v-if="false"-->
                 </el-input>
                 <div style="margin: 20px 0;"></div>
@@ -157,7 +157,8 @@
                 axios.post(this.url+'blog/updateBlog',this.form).then(function (res) {
 
                     if (res.data === true) {
-                        axios.get(URL+'blog/findAllBlog').then(function (res) {
+                        console.log("=============")
+                        axios.get(_this.url+'blog/findAllBlog').then(function (res) {
                             _this.tableData = res.data;
                         })
                     }
@@ -170,7 +171,7 @@
                 this.dialogFormVisible = true;
                 let _this= this;
                 axios.get(this.url+'blog/findIdBlog/'+row.blogId).then(function (res) {
-                     // _this.form.blogId = res.data.blogId;
+                    _this.form.blogId = res.data.blogId;
                     _this.form.blogTitle = res.data.blogTitle;
                     _this.form.blogContent = res.data.blogContent;
                     console.log(res.data.blogId)
