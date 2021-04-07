@@ -2,7 +2,8 @@
   <div class="about">
 
     <el-container style="height: 800px; border: 1px solid #eee">
-      <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+
+        <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
         <el-menu :default-openeds="['1', '3']" router>
           <el-submenu index="1" v-for="(item,index) in this.$router.options.routes"
                       :key="index" v-if="!item.hidden">
@@ -18,70 +19,59 @@
           <el-dropdown>
             <i class="el-icon-setting" style="margin-right: 15px"></i>
             <el-dropdown-menu slot="dropdown">
-<!--              <el-dropdown-item>-->
-<!--                <el-button type="text" @click="dialogFormVisible = true">查询内容</el-button>-->
-<!--              </el-dropdown-item>-->
               <el-dropdown-item >
                 <!--        隐藏的表单标签-->
                 <el-button type="text" @click="dialogFormVisible = true">新增内容</el-button>
 
               </el-dropdown-item>
-<!--              <el-dropdown-item>-->
-<!--                <el-button type="text" @click="dialogFormVisible = true">修改内容</el-button>-->
-<!--              </el-dropdown-item>-->
             </el-dropdown-menu>
           </el-dropdown>
           <span>王小虎</span>
         </el-header>
 
-      <!--      表单标签      -->
-
-        <el-dialog title="博客" :visible.sync="dialogFormVisible">
-          <el-form :model="form">
-            <el-input
-                    type="textarea"
-                    autosize
-                    placeholder="请输入Id"
-                    v-model="form.blogId"
-                    >
-<!--              v-if="false"-->
-            </el-input>
-            <div style="margin: 20px 0;"></div>
-            <el-input
-                    type="textarea"
-                    autosize
-                    placeholder="请输入标题"
-                    v-model="form.blogTitle">
-            </el-input>
-            <div style="margin: 20px 0;"></div>
-            <el-input
-                    type="textarea"
-                    :autosize="{ minRows: 2, maxRows: 4}"
-                    placeholder="请输入内容"
-                    v-model="form.blogContent">
-            </el-input>
-          </el-form>
-          <div slot="footer" class="dialog-footer">
-            <el-button @click="dialogFormVisible = false">取 消</el-button>
-            <el-button type="primary" @click="insertBlog()">确 定</el-button>
-          </div>
-        </el-dialog>
-
 
         <el-main>
-<!--                    <el-table :data="tableData">-->
-
-<!--                      <el-table-column prop="date" label="日期" width="140">-->
-<!--                      </el-table-column>-->
-<!--                      <el-table-column prop="name" label="姓名" width="120">-->
-<!--                      </el-table-column>-->
-<!--                      <el-table-column prop="address" label="地址">-->
-<!--                      </el-table-column>-->
-<!--                    </el-table>-->
           <router-view></router-view>
         </el-main>
+
       </el-container>
+
     </el-container>
+
+
+
+      <!--      表单标签      -->
+
+      <el-dialog title="博客" :visible.sync="dialogFormVisible">
+          <el-form :model="form">
+              <el-input
+                      type="textarea"
+                      autosize
+                      placeholder="请输入Id"
+                      v-model="form.blogId"
+              >
+                  <!--              v-if="false"-->
+              </el-input>
+              <div style="margin: 20px 0;"></div>
+              <el-input
+                      type="textarea"
+                      autosize
+                      placeholder="请输入标题"
+                      v-model="form.blogTitle">
+              </el-input>
+              <div style="margin: 20px 0;"></div>
+              <el-input
+                      type="textarea"
+                      :autosize="{ minRows: 2, maxRows: 4}"
+                      placeholder="请输入内容"
+                      v-model="form.blogContent">
+              </el-input>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+              <el-button @click="dialogFormVisible = false">取 消</el-button>
+              <el-button type="primary" @click="insertBlog()">确 定</el-button>
+          </div>
+      </el-dialog>
 
   </div>
 </template>
