@@ -66,6 +66,12 @@
                       placeholder="请输入内容"
                       v-model="form.blogContent">
               </el-input>
+            <el-form-item label="活动名称" :label-width="formLabelWidth">
+              <el-input v-model="form.name" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-itemlabel="活动区域" :label-width="formLabelWidth">
+              <el-input v-model="form.region" autocomplete="off"></el-input>
+            </el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
               <el-button @click="dialogFormVisible = false">取 消</el-button>
