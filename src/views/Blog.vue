@@ -69,7 +69,7 @@
             <el-form-item label="活动名称" :label-width="formLabelWidth">
               <el-input v-model="form.name" autocomplete="off"></el-input>
             </el-form-item>
-            <el-form-itemlabel="活动区域" :label-width="formLabelWidth">
+            <el-form-item label="活动区域" :label-width="formLabelWidth">
               <el-input v-model="form.region" autocomplete="off"></el-input>
             </el-form-item>
           </el-form>
