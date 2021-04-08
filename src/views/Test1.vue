@@ -147,6 +147,7 @@
                 url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
                 drawer: false,
                 direction: 'ttb',
+                // userId:''
             };
         },
         methods:{
@@ -215,6 +216,11 @@
         },
         //查询全部内容
         created(){
+
+            // this.$store.commit('setUserId','wuzhaojun');
+            // sessionStorage.setItem("userId", 'false');
+            // console.log("打印的id为："+sessionStorage.getItem('userId'));
+
             let _this= this;
             axios.get(this.url+'blog/findAllBlog').then(function (res) {
                 _this.tableData = res.data;

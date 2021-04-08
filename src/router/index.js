@@ -35,16 +35,24 @@ const routes = [
       {
         path: '/test2',
         name: '测试2',
+        // meta: {
+        //     requireAuth: true
+        // },
         component: Test2
       },
       {
         path: '/test3',
         name: '测试3',
+          meta: {
+              requireAuth: true
+          },
         component: Test3
       }
     ]
   }
-]
+];
+
+
 
 const router = new VueRouter({
   mode: 'history',
