@@ -6,6 +6,7 @@ import store from './store'
 import './plugins/element.js'
 
 Vue.config.productionTip = false;
+axios.defaults.withCredentials = true;
 
 
 router.beforeEach((to, from, next) => {
