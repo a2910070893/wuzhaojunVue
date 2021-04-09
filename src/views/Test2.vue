@@ -35,7 +35,7 @@
                 // this.$router.push({path : redirect})
                 let _this=this;
 
-                axios.get('http://localhost:8080/wuzhaojun/blog/findIdBlog/dfa').then(function (res) {
+                axios.get('https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/blog/findIdBlog/dfa').then(function (res) {
 
                     console.log(JSON.stringify(res.data)+"=====================")
                     sessionStorage.setItem("userId", res.data);

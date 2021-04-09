@@ -143,8 +143,8 @@
                     blogReleaseTime: '',
                     blogUpdateTime: ''
                 }],
-                url:'http://localhost:8080/wuzhaojun/',
-                // url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
+                // url:'http://localhost:8080/wuzhaojun/',
+                url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
                 drawer: false,
                 direction: 'ttb',
                 // userId:''
