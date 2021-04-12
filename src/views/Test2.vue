@@ -1,7 +1,7 @@
 <template>
 
     <div><h1>这个是测试2</h1>
-    <button @click="login()" width="30px">deng</button>
+        <button @click="login()" width="30px">deng</button>
 
         <button width="30px" @click="signOut()">bu</button>
 
