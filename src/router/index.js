@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Test1 from '../views/Test1.vue'
+import Blog from '../views/Blog.vue'
 import Test2 from '../views/Test2.vue'
 import Test3 from '../views/Test3.vue'
-import Blog from '../views/Blog.vue'
+import PersonalCenter from '../views/PersonalCenter.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -13,24 +13,24 @@ const routes = [
     name: 'Home',
     component: Home,
     hidden:true,
-    redirect:'/Test1'
+    redirect:'/blog'
   },{
-    path: '/blog',
-    name: '博客',
-    component: Blog,
+    path: '/PersonalCenter',
+    name: '个人中心',
+    component: PersonalCenter,
     children: [
       {
-        path: '/test1',
-        name: '测试1',
-        component: Test1
+        path: '/blog',
+        name: '博客',
+        component: Blog
       },
     ],
-    redirect:'/Test1'
+    redirect:'/blog'
   },
   {
     path: '/navigation',
     name: '测试总',
-    component: Blog,
+    component: PersonalCenter,
     children:[
       {
         path: '/test2',

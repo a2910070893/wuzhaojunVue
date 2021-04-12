@@ -1,9 +1,9 @@
 <template>
 
     <div><h1>这个是测试2</h1>
-    <button @click="tt()" width="30px">deng</button>
+    <button @click="login()" width="30px">deng</button>
 
-        <button width="30px" @click="kk()">bu</button>
+        <button width="30px" @click="signOut()">bu</button>
 
     </div>
 </template>
@@ -11,6 +11,16 @@
 <script>
     // import Home from './views/Home.vue';
     export default {
+        data(){
+            return{
+                user:{
+                    userName:'wuzhaojun',
+                    password:'123456'
+                },
+                url:'http://localhost:8080/wuzhaojun/',
+                // url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
+            }
+        },
         // name:'test2',
         // components: {
         //     Home
@@ -22,12 +32,13 @@
         //     }
         // }
         created() {
+            // window.location.reload();
             // sessionStorage.setItem("userId", 'false');
             //
             // console.log("打印的id为："+sessionStorage.getItem('userId'));
         },
         methods:{
-            tt(){
+            login(){
                 // sessionStorage.setItem("userId", 'true');
                 //
                 // console.log("打印的id为："+sessionStorage.getItem('userId'));
@@ -35,19 +46,31 @@
                 // this.$router.push({path : redirect})
                 let _this=this;
 
-                axios.get('http://localhost:8080/wuzhaojun/blog/findIdBlog/dfa').then(function (res) {
+                axios.post(this.url+'user/login',this.user).then(function (res) {
 
                     console.log(JSON.stringify(res.data)+"=====================")
                     sessionStorage.setItem("userId", res.data);
                     console.log("="+sessionStorage.getItem('userId'))
                     let redirect=decodeURIComponent(_this.$route.query.redirect || '/')
                     _this.$router.push({path : redirect})
+
+                    window.location.reload();
                 })
             },
-            kk(){
-                sessionStorage.setItem("userId", 'false');
+            signOut(){
 
-                console.log("打印的id为："+sessionStorage.getItem('userId'));
+                axios.get(this.url+'user/signOut').then(function (res) {
+                    console.log("111==="+JSON.stringify(res.data))
+                    sessionStorage.setItem("userId", res.data);
+                    console.log("打印的id为："+sessionStorage.getItem('userId'));
+                    alert("退出成功")
+
+                    window.location.reload();
+
+                })
+
+
+
             }
 
         }
