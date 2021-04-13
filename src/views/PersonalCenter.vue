@@ -26,7 +26,7 @@
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
-          <span>{{userId}}</span>
+          <span>{{userNameText}}</span>
         </el-header>
 
 
@@ -94,7 +94,7 @@
 </style>
 
 <script>
-const userId = sessionStorage.getItem('userId');
+const userNameText = sessionStorage.getItem('userNameText');
 import Blog from '../views/Blog.vue'
   export default {
       name:'PersonalCenter',
@@ -114,16 +114,16 @@ import Blog from '../views/Blog.vue'
           blogContent: '',
           delivery: false,
         },
-        userId:userId,
+          userNameText:userNameText,
         formLabelWidth: '120px',
-          url:'http://localhost:8080/wuzhaojun/',
-          // url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
+          // url:'http://localhost:8080/wuzhaojun/',
+          url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
       }
     },
     methods:{
       //新增博客
       insertBlog(){
-          this.userId = sessionStorage.getItem('userId');
+          // this.userNameText = sessionStorage.getItem('userNameText');
         this.dialogFormVisible = false;
 
         let _this = this;

@@ -17,8 +17,8 @@
                     userName:'wuzhaojun',
                     password:'123456'
                 },
-                url:'http://localhost:8080/wuzhaojun/',
-                // url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
+                // url:'http://localhost:8080/wuzhaojun/',
+                url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
             }
         },
         // name:'test2',
@@ -50,6 +50,7 @@
 
                     console.log(JSON.stringify(res.data)+"=====================")
                     sessionStorage.setItem("userId", res.data);
+                    sessionStorage.setItem("userNameText",_this.user.userName)
                     console.log("="+sessionStorage.getItem('userId'))
                     let redirect=decodeURIComponent(_this.$route.query.redirect || '/')
                     _this.$router.push({path : redirect})
@@ -62,6 +63,7 @@
                 axios.get(this.url+'user/signOut').then(function (res) {
                     console.log("111==="+JSON.stringify(res.data))
                     sessionStorage.setItem("userId", res.data);
+                    sessionStorage.setItem("userNameText",'未登录')
                     console.log("打印的id为："+sessionStorage.getItem('userId'));
                     alert("退出成功")
 

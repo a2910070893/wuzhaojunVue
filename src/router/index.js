@@ -5,6 +5,8 @@ import Blog from '../views/Blog.vue'
 import Test2 from '../views/Test2.vue'
 import Test3 from '../views/Test3.vue'
 import PersonalCenter from '../views/PersonalCenter.vue'
+import Login from '../views/Login.vue'
+import Index from '../components/index'
 Vue.use(VueRouter)
 
 const routes = [
@@ -13,11 +15,24 @@ const routes = [
     name: 'Home',
     component: Home,
     hidden:true,
-    redirect:'/blog'
+    // redirect:'/blog'
   },{
-    path: '/PersonalCenter',
+    path: '/login',
+    name: 'Login',
+    component: Login,
+    hidden:true,
+  },{
+    path: '/index',
+    name: 'Index',
+    component: Index,
+    hidden:true,
+  },{
+    path: '/personalCenter',
     name: '个人中心',
     component: PersonalCenter,
+    meta: {
+      requireAuth: true
+    },
     children: [
       {
         path: '/blog',
@@ -35,9 +50,9 @@ const routes = [
       {
         path: '/test2',
         name: '测试2',
-        // meta: {
-        //     requireAuth: true
-        // },
+        meta: {
+            requireAuth: true
+        },
         component: Test2
       },
       {

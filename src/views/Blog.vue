@@ -31,16 +31,16 @@
                     width="120">
             </el-table-column>
             <el-table-column
+                    fixed
+                    prop="blogId"
+                    label="博客ID"
+                    width="150"
+                    v-if="false">
+            </el-table-column>
+            <el-table-column
                     fixed="right"
                     label="操作"
-                    width="150">
-                <el-table-column
-                        fixed
-                        prop="blogId"
-                        label="博客ID"
-                        width="150"
-                        v-if="false">
-                </el-table-column>
+                    width="200">
                 <template slot-scope="scope">
                     <el-button @click="deleteBlog(scope.row)" type="text" size="small">删除</el-button>
                     <el-button type="text" size="small" @click="editIdBlog(scope.row)">
@@ -55,6 +55,7 @@
                         <!--                            查看-->
                         <!--                        </el-button>-->
                     </el-button>
+                    <el-button @click="shareBlog(scope.row)" type="text" size="small">{{scope.row.blogShareText}}</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -142,12 +143,14 @@
                     blogTitle: '',
                     blogCode: '',
                     blogReleaseTime: '',
-                    blogUpdateTime: ''
+                    blogUpdateTime: '',
+                    blogShare:'',
+                    blogShareText:''
                 }],
-                url:'http://localhost:8080/wuzhaojun/',
-                // url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
+                // url:'http://localhost:8080/wuzhaojun/',
+                url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
                 drawer: false,
-                direction: 'ttb'
+                direction: 'ttb',
             };
         },
         methods:{
@@ -212,6 +215,35 @@
                     _this.form.blogContent = res.data.blogContent;
                     console.log(res.data.blogId)
                 })
+            },
+            //分享
+            shareBlog(row){
+                let _this= this;
+
+                this.$confirm('是否<'+row.blogShareText+'>这篇博客, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+
+                    if (row.blogShare === '1') {
+                        row.blogShare = '0'
+                    }else {
+                        row.blogShare = '1'
+                    }
+                    axios.get(this.url+'blog/shareBlog/'+row.blogId+'/'+row.blogShare).then(function (res) {
+                        _this.reload();
+                    })
+                    this.$message({
+                        type: 'success',
+                        message: '<'+row.blogShareText+'>成功!'
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消<'+row.blogShareText+'>'
+                    });
+                });
             }
         },
         //查询全部内容

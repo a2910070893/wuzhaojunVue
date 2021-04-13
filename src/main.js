@@ -22,7 +22,7 @@ router.beforeEach((to, from, next) => {
       next({
         // path: '/test2', // 未登录则跳转至login页面
         // //redirect:  '/test1' // 登陆成功后回到当前页面，这里传值给login页面，to.fullPath为当前点击的页面
-        path:'/test2',
+        path:'/login',
          query:{redirect: to.fullPath}
       });
     }
