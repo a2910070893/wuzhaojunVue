@@ -92,7 +92,7 @@
             findIdBlog(row){
                 this.drawer = true;
                 let _this= this;
-                axios.get(this.url+'blog/findIdBlog/'+row.blogId).then(function (res) {
+                axios.get(this.url+'blog/shareIdBlog/'+row.blogId).then(function (res) {
                     _this.form.blogId = res.data.blogId;
                     _this.form.blogTitle = res.data.blogTitle;
                     _this.form.blogContent = res.data.blogContent;
