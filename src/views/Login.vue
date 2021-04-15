@@ -1,8 +1,8 @@
 <template>
     <div>
-        <button @click="login()" width="30px">deng</button>
+<!--        <button @click="login()" width="30px">deng</button>-->
 
-        <button width="30px" @click="signOut()">bu</button>
+<!--        <button width="30px" @click="signOut()">bu</button>-->
 
         <el-form :model="loginValidateForm" ref="loginValidateForm" label-width="100px" class="demo-ruleForm">
             <el-form-item
@@ -25,8 +25,8 @@
                 <el-input type="text" v-model.number="loginValidateForm.password" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="submitForm('loginValidateForm')">提交</el-button>
-                <el-button @click="resetForm('loginValidateForm')">重置</el-button>
+                <el-button type="primary" @click="submitForm('loginValidateForm')">登录</el-button>
+<!--                <el-button @click="resetForm('loginValidateForm')">重置</el-button>-->
             </el-form-item>
         </el-form>
 
@@ -54,33 +54,33 @@
         created() {
         },
         methods: {
-            login() {
-                let _this = this;
-
-                axios.post(this.url + 'user/login', this.user).then(function (res) {
-
-                    console.log(JSON.stringify(res.data) + "=====================")
-                    sessionStorage.setItem("userId", res.data);
-                    sessionStorage.setItem("userNameText", _this.user.userName)
-                    console.log("=" + sessionStorage.getItem('userId'))
-                    let redirect = decodeURIComponent(_this.$route.query.redirect || '/')
-                    _this.$router.push({path: redirect})
-
-                    window.location.reload();
-                })
-            },
-            signOut() {
-
-                axios.get(this.url + 'user/signOut').then(function (res) {
-                    console.log("111===" + JSON.stringify(res.data))
-                    sessionStorage.setItem("userId", res.data);
-                    sessionStorage.setItem("userNameText", '未登录')
-                    console.log("打印的id为：" + sessionStorage.getItem('userId'));
-                    alert("退出成功")
-
-                    window.location.reload();
-                })
-            },
+            // login() {
+            //     let _this = this;
+            //
+            //     axios.post(this.url + 'user/login', this.user).then(function (res) {
+            //
+            //         console.log(JSON.stringify(res.data) + "=====================")
+            //         sessionStorage.setItem("userId", res.data);
+            //         sessionStorage.setItem("userNameText", _this.user.userName)
+            //         console.log("=" + sessionStorage.getItem('userId'))
+            //         let redirect = decodeURIComponent(_this.$route.query.redirect || '/')
+            //         _this.$router.push({path: redirect})
+            //
+            //         window.location.reload();
+            //     })
+            // },
+            // signOut() {
+            //
+            //     axios.get(this.url + 'user/signOut').then(function (res) {
+            //         console.log("111===" + JSON.stringify(res.data))
+            //         sessionStorage.setItem("userId", res.data);
+            //         sessionStorage.setItem("userNameText", '未登录')
+            //         console.log("打印的id为：" + sessionStorage.getItem('userId'));
+            //         alert("退出成功")
+            //
+            //         window.location.reload();
+            //     })
+            // },
             submitForm() {
                 let _this = this;
                 axios.post(this.url + 'user/login', this.loginValidateForm).then(function (res) {

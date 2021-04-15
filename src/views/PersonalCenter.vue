@@ -26,7 +26,8 @@
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
-          <span>{{userNameText}}</span>
+<!--          <span>{{userNameText}}</span>-->
+            <span>新增博客内容</span>
         </el-header>
 
 
