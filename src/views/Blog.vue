@@ -263,6 +263,9 @@
     }
 </script>
 
-<style scoped>
-
+<style rel="stylesheet/scss" lang="scss">
+.el-drawer__body
+  {
+    overflow: auto;
+}
 </style>
