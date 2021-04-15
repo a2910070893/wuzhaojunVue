@@ -46,13 +46,13 @@
                :visible.sync="drawer"
                :direction="direction"
                size=80%>
-           <span>{{form.blogContent}}</span>
+           <div class="markdown-body" v-html="form.blogContent"></div>
        </el-drawer>
-
    </div>
 </template>
 
 <script>
+// import 'github-markdown-css'
     export default {
         name: "index",
         data() {
@@ -95,7 +95,10 @@
                 axios.get(this.url+'blog/shareIdBlog/'+row.blogId).then(function (res) {
                     _this.form.blogId = res.data.blogId;
                     _this.form.blogTitle = res.data.blogTitle;
-                    _this.form.blogContent = res.data.blogContent;
+                    var MardownIt = require("markdown-it")
+                    var md = new  MardownIt;
+                    var result = md.render(res.data.blogContent)
+                    _this.form.blogContent = result;
                     console.log("==========="+res.data.blogId)
                 })
             },

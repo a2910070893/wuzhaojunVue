@@ -95,13 +95,15 @@
                         placeholder="请输入标题"
                         v-model="form.blogTitle">
                 </el-input>
+
                 <div style="margin: 20px 0;"></div>
-                <el-input
-                        type="textarea"
-                        :autosize="{ minRows: 2, maxRows: 4}"
-                        placeholder="请输入内容"
-                        v-model="form.blogContent">
-                </el-input>
+<!--                <el-input-->
+<!--                        type="textarea"-->
+<!--                        :autosize="{ minRows: 2, maxRows: 4}"-->
+<!--                        placeholder="请输入内容"-->
+<!--                        v-model="form.blogContent">-->
+<!--                </el-input>-->
+                <mavon-editor ref="md" v-model="form.blogContent"/>
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -116,7 +118,7 @@
                 :visible.sync="drawer"
                 :direction="direction"
                 size=80%>
-            <span>{{form.blogContent}}</span>
+            <div class="md" v-html="form.blogContent"></div>
         </el-drawer>
 
     </div>
@@ -124,6 +126,7 @@
 </template>
 
 <script>
+// import 'github-markdown-css'
     export default {
         inject:['reload'],
         data() {
@@ -212,7 +215,10 @@
                 axios.get(this.url+'blog/findIdBlog/'+row.blogId).then(function (res) {
                     _this.form.blogId = res.data.blogId;
                     _this.form.blogTitle = res.data.blogTitle;
-                    _this.form.blogContent = res.data.blogContent;
+                    var MardownIt = require("markdown-it")
+                    var md = new  MardownIt;
+                    var result = md.render(res.data.blogContent)
+                    _this.form.blogContent = result;
                     console.log(res.data.blogId)
                 })
             },

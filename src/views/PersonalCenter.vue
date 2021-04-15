@@ -61,12 +61,13 @@
                       v-model="form.blogTitle">
               </el-input>
               <div style="margin: 20px 0;"></div>
-              <el-input
-                      type="textarea"
-                      :autosize="{ minRows: 2, maxRows: 4}"
-                      placeholder="请输入内容"
-                      v-model="form.blogContent">
-              </el-input>
+<!--              <el-input-->
+<!--                      type="textarea"-->
+<!--                      :autosize="{ minRows: 2, maxRows: 4}"-->
+<!--                      placeholder="请输入内容"-->
+<!--                      v-model="form.blogContent">-->
+<!--              </el-input>-->
+              <mavon-editor ref="md" class="markdown-body" v-model="form.blogContent"/>
 <!--            <el-form-item label="活动名称" :label-width="formLabelWidth">-->
 <!--              <el-input v-model="form.name" autocomplete="off"></el-input>-->
 <!--            </el-form-item>-->
