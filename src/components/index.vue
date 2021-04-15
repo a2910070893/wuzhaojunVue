@@ -38,6 +38,17 @@
                </template>
            </el-table-column>
        </el-table>
+
+
+       <!--        抽屉展示内容-->
+       <el-drawer
+               :title="form.blogTitle"
+               :visible.sync="drawer"
+               :direction="direction"
+               size=80%>
+           <span>{{form.blogContent}}</span>
+       </el-drawer>
+
    </div>
 </template>
 
@@ -54,10 +65,18 @@
                     blogReleaseTime: '',
                     blogUpdateTime: '',
                     blogShare:'',
-                    blogShareText:''
+                    blogShareText:'',
                 }],
+                form: {
+                    blogId: '',
+                    blogTitle: '',
+                    blogContent:'',
+                    delivery: false,
+                },
                 // url:'http://localhost:8080/wuzhaojun/',
                 url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
+                drawer: false,
+                direction: 'ttb',
             }
         },
         created() {
@@ -67,10 +86,25 @@
                 // window.location.reload();
                 // console.log( _this.tableData)
             })
+        },
+        methods:{
+            //查询博客内容(待优化后端要进行判断是否为分享在展示)
+            findIdBlog(row){
+                this.drawer = true;
+                let _this= this;
+                axios.get(this.url+'blog/findIdBlog/'+row.blogId).then(function (res) {
+                    _this.form.blogId = res.data.blogId;
+                    _this.form.blogTitle = res.data.blogTitle;
+                    _this.form.blogContent = res.data.blogContent;
+                    console.log("==========="+res.data.blogId)
+                })
+            },
         }
     }
 </script>
 
-<style scoped>
-
+<style rel="stylesheet/scss" lang="scss">
+.el-drawer__body {
+    overflow: auto;
+}
 </style>
