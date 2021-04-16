@@ -61,6 +61,13 @@
                       v-model="form.blogTitle">
               </el-input>
               <div style="margin: 20px 0;"></div>
+              <el-input
+                      type="textarea"
+                      autosize
+                      placeholder="请输入昵称"
+                      v-model="form.blogAuthor">
+              </el-input>
+              <div style="margin: 20px 0;"></div>
 <!--              <el-input-->
 <!--                      type="textarea"-->
 <!--                      :autosize="{ minRows: 2, maxRows: 4}"-->
@@ -115,6 +122,7 @@ import Blog from '../views/Blog.vue'
           blogTitle: '',
           blogContent: '',
           blogUser:userNameText,
+          blogAuthor:'',
           delivery: false,
         },
           userNameText:userNameText,

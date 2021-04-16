@@ -20,6 +20,11 @@
                    width="120">
            </el-table-column>
            <el-table-column
+                   prop="blogAuthor"
+                   label="博客作者"
+                   width="120">
+           </el-table-column>
+           <el-table-column
                    fixed
                    prop="blogId"
                    label="博客ID"
@@ -76,6 +81,7 @@ import 'github-markdown-css'
                     blogUpdateTime: '',
                     blogShare:'',
                     blogShareText:'',
+                    blogAuthor:'',
                 }],
                 form: {
                     blogId: '',
