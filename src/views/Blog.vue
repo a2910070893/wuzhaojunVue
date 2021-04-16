@@ -137,6 +137,7 @@
 </template>
 
 <script>
+const userNameText = sessionStorage.getItem('userNameText');
 import 'github-markdown-css'
     export default {
         inject:['reload'],
@@ -194,12 +195,14 @@ import 'github-markdown-css'
                     blogReleaseTime: '',
                     blogUpdateTime: '',
                     blogShare:'',
-                    blogShareText:''
+                    blogShareText:'',
+                    blogUser:userNameText
                 }],
                 // url:'http://localhost:8080/wuzhaojun/',
                 url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
                 drawer: false,
                 direction: 'ttb',
+                userNameText:userNameText,
             };
         },
         methods:{
@@ -301,9 +304,10 @@ import 'github-markdown-css'
             // this.$store.commit('setUserId','wuzhaojun');
             // sessionStorage.setItem("userId", 'false');
             // console.log("打印的id为："+sessionStorage.getItem('userId'));
-
+            console.log("======dddddddddddddd===========",userNameText)
             let _this= this;
-            axios.get(this.url+'blog/findAllBlog').then(function (res) {
+            axios.get(this.url+'blog/findAllBlog'+'/'+userNameText).then(function (res) {
+                console.log("=================",_this.userNameText)
                 _this.tableData = res.data;
                 // window.location.reload();
                 // console.log( _this.tableData)

@@ -114,6 +114,7 @@ import Blog from '../views/Blog.vue'
           blogId: '',
           blogTitle: '',
           blogContent: '',
+          blogUser:userNameText,
           delivery: false,
         },
           userNameText:userNameText,
