@@ -39,6 +39,9 @@
                    <el-button @click="findIdBlog(scope.row)" type="text" size="small">
                        查看
                    </el-button>
+                   <el-button @click="blogCollection(scope.row)" type="text" size="small">
+                       {{scope.row.blogCodeText}}
+                   </el-button>
 
                </template>
            </el-table-column>
@@ -47,7 +50,7 @@
        <el-pagination
                background
                layout="prev, pager, next"
-               page-size="6"
+               page-size="5"
                :total="total"
                @current-change="page"
                >
@@ -76,11 +79,26 @@
 
 <script>
 import 'github-markdown-css'
+
+const userNameText = sessionStorage.getItem('userNameText');
     export default {
+        inject:['reload'],
         name: "index",
         data() {
             return {
-                tableData: [],
+                tableData: [{
+                    blogId: '',
+                    blogContent: '',
+                    blogTitle: '',
+                    blogCode: '',
+                    blogReleaseTime: '',
+                    blogUpdateTime: '',
+                    blogShare:'',
+                    blogShareText:'',
+                    blogUser:'',
+                    blogCode:'',
+                    blogCodeText:''
+                }],
                 form: {
                     blogId: '',
                     blogTitle: '',
@@ -96,10 +114,10 @@ import 'github-markdown-css'
         },
         created() {
             const _this= this;
-            axios.get(this.url+'blog/shareAllBlog/1/4').then(function (res) {
+            axios.get(this.url+'blog/shareAllBlog/1/5').then(function (res) {
                 console.log(JSON.stringify(res)+"----------99")
                 _this.tableData = res.data.blogEntities;
-                _this.total = JSON.parse(res.data.total)
+                 _this.total = JSON.parse(res.data.total)
                   // alert(_this.total)
                 // window.location.reload();
                 //  console.log( _this.total)
@@ -119,9 +137,9 @@ import 'github-markdown-css'
                     console.log("==========="+res.data.blogId)
                 })
             },
-            page(page){
+            page(currentPage ){
                 const _this= this;
-                axios.get(this.url+'blog/shareAllBlog/'+this.page+'/4').then(function (res) {
+                axios.get(this.url+'blog/shareAllBlog/'+currentPage+'/3').then(function (res) {
                     console.log(JSON.stringify(res)+"----------99")
                     _this.tableData = res.data.blogEntities;
                     _this.total = JSON.parse(res.data.total)
@@ -129,6 +147,34 @@ import 'github-markdown-css'
                     // window.location.reload();
                     //  console.log( _this.total)
                 })
+            },
+            blogCollection(row){
+                let _this= this;
+
+                this.$confirm('是否<'+row.blogCodeText+'>这篇博客, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+
+                    if (row.blogCode === '1') {
+                        row.blogCode = '0'
+                    }else {
+                        row.blogCode = '1'
+                    }
+                    axios.get(this.url+'blog/blogCollection/'+row.blogCode+'/'+userNameText+'/'+row.blogId).then(function (res) {
+                        _this.reload();
+                    })
+                    this.$message({
+                        type: 'success',
+                        message: '<'+row.blogCodeText+'>成功!'
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消<'+row.blogCodeText+'>'
+                    });
+                });
             }
         }
     }

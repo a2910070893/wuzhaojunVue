@@ -60,7 +60,15 @@
             </el-table-column>
         </el-table>
 
-
+        <!--分页查询-->
+        <el-pagination
+                background
+                layout="prev, pager, next"
+                page-size="5"
+                :total="total"
+                @current-change="page"
+        >
+        </el-pagination>
         <!--        <el-dialog title="博客" :visible.sync="dialogFormVisible">-->
         <!--            <el-form :model="form">-->
         <!--                <el-form-item label="博客Id" :label-width="formLabelWidth" v-if="false">-->
@@ -198,11 +206,12 @@ import 'github-markdown-css'
                     blogShareText:'',
                     blogUser:userNameText
                 }],
-                // url:'http://localhost:8080/wuzhaojun/',
-                url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
+                url:'http://localhost:8080/wuzhaojun/',
+                // url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
                 drawer: false,
                 direction: 'ttb',
                 userNameText:userNameText,
+                total:null
             };
         },
         methods:{
@@ -296,6 +305,17 @@ import 'github-markdown-css'
                         message: '已取消<'+row.blogShareText+'>'
                     });
                 });
+            },
+            page(currentPage ){
+                const _this= this;
+                axios.get(this.url+'blog/findAllBlog'+'/'+userNameText+'/'+currentPage).then(function (res) {
+                    console.log(JSON.stringify(res)+"----------99")
+                    _this.tableData = res.data.blogEntities;
+                    _this.total = JSON.parse(res.data.total)
+                    // alert(_this.total)
+                    // window.location.reload();
+                    //  console.log( _this.total)
+                })
             }
         },
         //查询全部内容
@@ -306,9 +326,10 @@ import 'github-markdown-css'
             // console.log("打印的id为："+sessionStorage.getItem('userId'));
             console.log("======dddddddddddddd===========",userNameText)
             let _this= this;
-            axios.get(this.url+'blog/findAllBlog'+'/'+userNameText).then(function (res) {
+            axios.get(this.url+'blog/findAllBlog'+'/'+userNameText+'/1').then(function (res) {
                 console.log("=================",_this.userNameText)
-                _this.tableData = res.data;
+                _this.tableData = res.data.blogEntities;
+                _this.total = JSON.parse(res.data.total)
                 // window.location.reload();
                 // console.log( _this.tableData)
             })

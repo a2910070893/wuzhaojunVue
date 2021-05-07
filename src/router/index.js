@@ -8,6 +8,7 @@ import PersonalCenter from '../views/PersonalCenter.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Index from '../components/index'
+import BlogCollection from '../views/BlogCollection.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -44,6 +45,11 @@ const routes = [
         path: '/blog',
         name: '博客',
         component: Blog
+      },
+      {
+        path: '/blogCollection',
+        name: '博客收藏',
+        component: BlogCollection
       },
     ],
     redirect:'/blog'

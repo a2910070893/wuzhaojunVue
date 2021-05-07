@@ -46,8 +46,8 @@
                 //     userName: 'wuzhaojun',
                 //     password: '123456'
                 // },
-                // url: 'http://localhost:8080/wuzhaojun/',
-                url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
+                url: 'http://localhost:8080/wuzhaojun/',
+                // url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
                 loginValidateForm: {
                     userName: '',
                     password:''
