@@ -14,6 +14,7 @@
         <el-menu-item index="/personalCenter">个人中心</el-menu-item>
 <!--        <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>-->
         <el-menu-item  style="float: right" @click="login">{{userNameText}}</el-menu-item><!-- @click="login"-->
+        <el-menu-item  style="float: right" @click="register">注册</el-menu-item>
       </el-menu>
     </div>
 
@@ -96,6 +97,9 @@ export default {
 
         })
       }
+    },
+    register(){
+        this.$router.push('/register')
     }
 
   },

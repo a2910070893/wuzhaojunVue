@@ -1,5 +1,6 @@
 <template>
     <div>
+        <div style="text-align: center;color: red"><h1>登录界面</h1></div>
 <!--        <button @click="login()" width="30px">deng</button>-->
 
 <!--        <button width="30px" @click="signOut()">bu</button>-->
@@ -26,6 +27,9 @@
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="submitForm('loginValidateForm')">登录</el-button>
+                <router-link :to="{ name: 'Register'}">
+                <el-button type="primary" style="margin-left: 20px;" >注册</el-button>
+                </router-link>
 <!--                <el-button @click="resetForm('loginValidateForm')">重置</el-button>-->
             </el-form-item>
         </el-form>

@@ -43,9 +43,17 @@
                </template>
            </el-table-column>
        </el-table>
+       <!--分页查询-->
+       <el-pagination
+               background
+               layout="prev, pager, next"
+               page-size="6"
+               :total="total"
+               @current-change="page"
+               >
+       </el-pagination>
 
-
-       <!--        抽屉展示内容-->
+       <!--   @current-change     抽屉展示内容-->
        <el-drawer
                :title="form.blogTitle"
                :visible.sync="drawer"
@@ -72,36 +80,32 @@ import 'github-markdown-css'
         name: "index",
         data() {
             return {
-                tableData: [{
-                    blogId: '',
-                    blogContent: '',
-                    blogTitle: '',
-                    blogCode: '',
-                    blogReleaseTime: '',
-                    blogUpdateTime: '',
-                    blogShare:'',
-                    blogShareText:'',
-                    blogAuthor:'',
-                }],
+                tableData: [],
                 form: {
                     blogId: '',
                     blogTitle: '',
                     blogContent:'',
                     delivery: false,
                 },
-                // url:'http://localhost:8080/wuzhaojun/',
-                url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
+                url:'http://localhost:8080/wuzhaojun/',
+                // url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
                 drawer: false,
                 direction: 'ttb',
+                total:null
             }
         },
         created() {
-            let _this= this;
-            axios.get(this.url+'blog/shareAllBlog').then(function (res) {
-                _this.tableData = res.data;
+            const _this= this;
+            axios.get(this.url+'blog/shareAllBlog/1/4').then(function (res) {
+                console.log(JSON.stringify(res)+"----------99")
+                _this.tableData = res.data.blogEntities;
+                _this.total = JSON.parse(res.data.total)
+                  // alert(_this.total)
                 // window.location.reload();
-                // console.log( _this.tableData)
+                //  console.log( _this.total)
             })
+             // console.log(JSON.stringify(_this.tableData)+"--------------jj")
+             //  alert(JSON.parse(this.total))
         },
         methods:{
             //查询博客内容(待优化后端要进行判断是否为分享在展示)
@@ -115,6 +119,17 @@ import 'github-markdown-css'
                     console.log("==========="+res.data.blogId)
                 })
             },
+            page(page){
+                const _this= this;
+                axios.get(this.url+'blog/shareAllBlog/'+this.page+'/4').then(function (res) {
+                    console.log(JSON.stringify(res)+"----------99")
+                    _this.tableData = res.data.blogEntities;
+                    _this.total = JSON.parse(res.data.total)
+                    // alert(_this.total)
+                    // window.location.reload();
+                    //  console.log( _this.total)
+                })
+            }
         }
     }
 </script>

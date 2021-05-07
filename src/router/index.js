@@ -6,6 +6,7 @@ import Test2 from '../views/Test2.vue'
 import Test3 from '../views/Test3.vue'
 import PersonalCenter from '../views/PersonalCenter.vue'
 import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
 import Index from '../components/index'
 Vue.use(VueRouter)
 
@@ -20,6 +21,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login,
+    hidden:true,
+  },{
+    path: '/register',
+    name: 'Register',
+    component: Register,
     hidden:true,
   },{
     path: '/index',
