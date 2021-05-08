@@ -206,8 +206,8 @@ import 'github-markdown-css'
                     blogShareText:'',
                     blogUser:userNameText
                 }],
-                url:'http://localhost:8080/wuzhaojun/',
-                // url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
+                // url:'http://localhost:8080/wuzhaojun/',
+                url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
                 drawer: false,
                 direction: 'ttb',
                 userNameText:userNameText,
@@ -223,9 +223,7 @@ import 'github-markdown-css'
 
                     if (res.data === true) {
                         console.log("=============")
-                        axios.get(_this.url+'blog/findAllBlog').then(function (res) {
-                            _this.tableData = res.data;
-                        })
+                            _this.reload();
                     }
 
                 })

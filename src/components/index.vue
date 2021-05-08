@@ -105,8 +105,8 @@ const userNameText = sessionStorage.getItem('userNameText');
                     blogContent:'',
                     delivery: false,
                 },
-                url:'http://localhost:8080/wuzhaojun/',
-                // url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
+                // url:'http://localhost:8080/wuzhaojun/',
+                url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
                 drawer: false,
                 direction: 'ttb',
                 total:null
@@ -114,13 +114,13 @@ const userNameText = sessionStorage.getItem('userNameText');
         },
         created() {
             const _this= this;
-            axios.get(this.url+'blog/shareAllBlog/1/5').then(function (res) {
+            axios.get(this.url+'blog/shareAllBlog/1/5/'+userNameText).then(function (res) {
                 console.log(JSON.stringify(res)+"----------99")
                 _this.tableData = res.data.blogEntities;
                  _this.total = JSON.parse(res.data.total)
                   // alert(_this.total)
-                // window.location.reload();
-                //  console.log( _this.total)
+                 //window.location.reload();
+                 //console.log( _this.total)
             })
              // console.log(JSON.stringify(_this.tableData)+"--------------jj")
              //  alert(JSON.parse(this.total))
@@ -139,7 +139,7 @@ const userNameText = sessionStorage.getItem('userNameText');
             },
             page(currentPage ){
                 const _this= this;
-                axios.get(this.url+'blog/shareAllBlog/'+currentPage+'/3').then(function (res) {
+                axios.get(this.url+'blog/shareAllBlog/'+currentPage+'/5/'+userNameText).then(function (res) {
                     console.log(JSON.stringify(res)+"----------99")
                     _this.tableData = res.data.blogEntities;
                     _this.total = JSON.parse(res.data.total)
@@ -148,10 +148,11 @@ const userNameText = sessionStorage.getItem('userNameText');
                     //  console.log( _this.total)
                 })
             },
-            blogCollection(row){
-                let _this= this;
+            blogCollection(row) {
+                let _this = this;
 
-                this.$confirm('是否<'+row.blogCodeText+'>这篇博客, 是否继续?', '提示', {
+                if (window.sessionStorage.getItem('userId') === "true") {
+                this.$confirm('是否<' + row.blogCodeText + '>这篇博客, 是否继续?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
@@ -159,22 +160,26 @@ const userNameText = sessionStorage.getItem('userNameText');
 
                     if (row.blogCode === '1') {
                         row.blogCode = '0'
-                    }else {
+                    } else {
                         row.blogCode = '1'
                     }
-                    axios.get(this.url+'blog/blogCollection/'+row.blogCode+'/'+userNameText+'/'+row.blogId).then(function (res) {
+                    axios.get(this.url + 'blog/blogCollection/' + row.blogCode + '/' + userNameText + '/' + row.blogId).then(function (res) {
                         _this.reload();
                     })
                     this.$message({
                         type: 'success',
-                        message: '<'+row.blogCodeText+'>成功!'
+                        message: '<' + row.blogCodeText + '>成功!'
                     });
                 }).catch(() => {
                     this.$message({
                         type: 'info',
-                        message: '已取消<'+row.blogCodeText+'>'
+                        message: '已取消<' + row.blogCodeText + '>'
                     });
                 });
+            }else {
+                    alert("没有登录不可以收藏，请先登录")
+                    _this.$router.push({path: "login"})
+                }
             }
         }
     }

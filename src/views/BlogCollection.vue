@@ -105,8 +105,8 @@
                     blogContent:'',
                     delivery: false,
                 },
-                url:'http://localhost:8080/wuzhaojun/',
-                // url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
+                // url:'http://localhost:8080/wuzhaojun/',
+                url:'https://wuzhaojun.cn:2443/wuzhaojun-0.0.1-SNAPSHOT/',
                 drawer: false,
                 direction: 'ttb',
                 total:null
@@ -156,7 +156,7 @@
                     }else {
                         row.blogCode = '1'
                     }
-                    axios.get(this.url+'blog/blogCollection/'+row.blogCode+'/'+row.blogUser+'/'+row.blogId).then(function (res) {
+                    axios.get(this.url+'blog/blogCollection/'+row.blogCode+'/'+userNameText+'/'+row.blogId).then(function (res) {
                         _this.reload();
                     })
                     this.$message({
